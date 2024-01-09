@@ -81,3 +81,7 @@ def search_bar(request):
                 })
             else:
                 return render(request,  "encyclopedia/notfound.html")
+
+
+def new_page(request):
+    return render(request, "encyclopedia/new_page.html")

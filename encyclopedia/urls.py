@@ -6,5 +6,6 @@ app_name = "wiki"
 urlpatterns = [
     path("", views.index, name="index"),
     path('wiki/<str:entry>', views.search, name='search'),
-    path('search_bar',views.search_bar, name='search_bar')
+    path('search_bar',views.search_bar, name='search_bar'),
+    path('new_page',views.new_page, name='new_page'),
 ]
