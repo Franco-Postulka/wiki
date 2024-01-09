@@ -85,3 +85,18 @@ def search_bar(request):
 
 def new_page(request):
     return render(request, "encyclopedia/new_page.html")
+
+def save_page(request):
+    if request.method == "POST":
+        title = request.POST['t']
+        if title in util.list_entries():
+            return render(request, "encyclopedia/already_exists.html")
+        else:
+            paragraph = request.POST['p']
+            html_content = markdown2.markdown(paragraph)
+            util.save_entry(title,paragraph)
+            return render(request, "encyclopedia/entry.html", {
+                "entry_content": html_content,
+                "entry_title": title
+            })
+        
