@@ -25,27 +25,26 @@ def search(request, entry):
         })
 
 def compare_str(str1,str2):
-    """_summary: compare 2 strings and returns the number of coincidences
+    """_summary: compare 2 strings and returns true if there are coincidences
     Args:
         str1 (str)
         str2 (str)
     Returns:
-        int: numbrer of coincidences
+        bool: if there are coincidences or not
     """
-    
     import re
-    contador = 0
     if len(str1)<= len(str2):
-        for i in range(len(str1)):
-            coincidences = re.search(str1[i].lower(),str2[i].lower())
-            if coincidences != None:
-                contador += 1
+        comparison = re.findall(str1.lower(),str2.lower())
+        if len(comparison) > 0:
+            return True
+        else:
+            return False
     else:
-        for i in range(len(str2)):
-            coincidences = re.search(str1[i].lower(),str2[i].lower())
-            if coincidences != None:
-                contador += 1
-    return contador
+        comparison = re.findall(str2.lower(),str1.lower())
+        if len(comparison) > 0:
+            return True
+        else:
+            return False
 
 def find_coincidences(list,string):
     """_summary: receives a list and a string, returns a list with elements of the list it received
@@ -59,7 +58,7 @@ def find_coincidences(list,string):
     new_list = []
     for element in list:
         coincidences = compare_str(string,element)
-        if coincidences >= 1:
+        if coincidences == True:
             new_list.append(element)
     return new_list
 
