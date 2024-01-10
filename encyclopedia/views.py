@@ -1,12 +1,14 @@
 from django.shortcuts import render
 import markdown2
 from . import util
+import random
 from django import forms
 
 
 def index(request):
     return render(request, "encyclopedia/index.html", {
-        "entries": util.list_entries()
+        "entries": util.list_entries(),
+        "heading": "All Pages"
     })
 
 def search(request, entry):
@@ -75,7 +77,8 @@ def search_bar(request):
             coincidences = find_coincidences(entries,search)
             if len(coincidences) > 0:
                 return render(request, "encyclopedia/index.html", {
-                "entries": coincidences
+                "entries": coincidences,
+                "heading": f"""Search results for "{search}" """
                 })
             else:
                 return render(request,  "encyclopedia/notfound.html")
@@ -115,5 +118,13 @@ def save_edit(request):
         html_content = markdown2.markdown(content)
     return render(request, "encyclopedia/entry.html", {
             "entry_content": html_content,
+            "entry_title": title
+        })
+
+def random_page(request):
+    title = random.choice(util.list_entries())
+    content =  markdown2.markdown(util.get_entry(title)) 
+    return render(request, "encyclopedia/entry.html", {
+            "entry_content": content,
             "entry_title": title
         })
