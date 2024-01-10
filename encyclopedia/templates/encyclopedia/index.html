@@ -5,11 +5,11 @@
 {% endblock %}
 
 {% block body %}
-    <h1>{{ heading }}</h1>
+    <h1>{{ heading|safe}}</h1>
 
     <ul>
         {% for entry in entries %}
-            <li><a href= "wiki/{{entry}}" style="text-decoration: none;">{{entry}}</a></li>
+            <li><a href= "wiki/{{entry|safe}}" style="text-decoration: none;">{{entry|safe}}</a></li>
         {% endfor %}
     </ul>
 

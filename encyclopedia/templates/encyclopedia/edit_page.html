@@ -8,12 +8,12 @@
 {% endblock %}
 
 {% block body %}
-    <h1>Editing {{entry_title}} content</h1>
+    <h1>Editing {{entry_title|safe}} content</h1>
     <form action="{% url 'wiki:save_edit' %}" method="post" class="new">
         {% csrf_token %}
         <div>
             <h6> Markdown content</h6>
-            <textarea id="edit_content" name="content">{{ content}}</textarea>
+            <textarea id="edit_content" name="content">{{ content|safe}}</textarea>
         </div>
         <input type="submit" value="Confirm edition" class="submit">
         <input type="hidden" name="title" value="{{ entry_title }}">
