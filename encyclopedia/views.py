@@ -1,6 +1,4 @@
-from django.http import HttpResponseRedirect
 from django.shortcuts import render
-from django.urls import reverse
 import markdown2
 from . import util
 from django import forms
@@ -100,3 +98,22 @@ def save_page(request):
                 "entry_title": title
             })
         
+def edit_page(request):
+    if request.method == "POST":
+        title = request.POST['entry_title']
+        content = util.get_entry(title)
+    return render(request, "encyclopedia/edit_page.html",{
+        "entry_title": title,
+        "content": content
+    })
+
+def save_edit(request):
+    if request.method == "POST":
+        content = request.POST['content']
+        title = request.POST['title']
+        util.save_entry(title,content)
+        html_content = markdown2.markdown(content)
+    return render(request, "encyclopedia/entry.html", {
+            "entry_content": html_content,
+            "entry_title": title
+        })

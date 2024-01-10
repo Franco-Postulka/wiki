@@ -59,13 +59,21 @@ textarea {
     white-space: pre-wrap;
     padding: 10px; 
 }
-#submit{
+#edit_content{
+    width: 100%;
+    height: 340px;
+    resize: none;
+    white-space: pre-wrap;
+    padding: 10px; 
+}
+.submit{
     background-color: rgb(19, 246, 19);
     border-radius: 10px;
     border: 2px solid green;
-    width: 100px;
+    width: 120px;
+    padding: 4px;
 }
-#submit:hover{
+.submit:hover{
     background-color: orange;
     border: 2px solid orangered;
 }
